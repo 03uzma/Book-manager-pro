@@ -11,9 +11,11 @@ const BookForm = ({ editingBook, setEditingBook }) => {
     }
   }, [editingBook]);
 
+  /*
   const handleSubmit = async (e) => {
     e.preventDefault();
     const bookData = { title, author };
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
 
     try {
       if (editingBook) {
@@ -36,6 +38,40 @@ const BookForm = ({ editingBook, setEditingBook }) => {
       console.error("Error saving book:", error);
     }
   };
+*/
+
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    const bookData = { title, author };
+    
+    // Grab the live URL or fall back to localhost
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+
+    try {
+      if (editingBook) {
+        await fetch(`${BACKEND_URL}/api/books/${editingBook.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bookData),
+        });
+        setEditingBook(null);
+      } else {
+        await fetch(`${BACKEND_URL}/api/books`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bookData),
+        });
+      }
+      setTitle('');
+      setAuthor('');
+    } catch (error) {
+      console.error("Error saving book:", error);
+    }
+  };
+
+
+
 
   return (
     <form onSubmit={handleSubmit}>
