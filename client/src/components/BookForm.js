@@ -11,41 +11,11 @@ const BookForm = ({ editingBook, setEditingBook }) => {
     }
   }, [editingBook]);
 
-  /*
   const handleSubmit = async (e) => {
     e.preventDefault();
     const bookData = { title, author };
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
-
-    try {
-      if (editingBook) {
-        await fetch(`http://localhost:5000/api/books/${editingBook.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(bookData),
-        });
-        setEditingBook(null);
-      } else {
-        await fetch('http://localhost:5000/api/books', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(bookData),
-        });
-      }
-      setTitle('');
-      setAuthor('');
-    } catch (error) {
-      console.error("Error saving book:", error);
-    }
-  };
-*/
-
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    const bookData = { title, author };
     
-    // Grab the live URL or fall back to localhost
+  
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
 
     try {
@@ -70,11 +40,9 @@ const handleSubmit = async (e) => {
     }
   };
 
-
-
-
   return (
-    <form onSubmit={handleSubmit}>
+  
+    <form onSubmit={handleSubmit} style={{ maxWidth: '500px', margin: '0 auto' }}>
       <h2 style={{ marginTop: 0 }}>{editingBook ? 'Edit Book Details' : 'Add New Book'}</h2>
       <div className="form-group">
         <input 
@@ -92,9 +60,9 @@ const handleSubmit = async (e) => {
           required 
         />
       </div>
-      <div style={{ display: 'flex', gap: '10px' }}>
+      <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '20px' }}>
         <button type="submit">
-          {editingBook ? 'Save Changes' : 'Add to Inventory'}
+          {editingBook ? 'Save Changes' : 'Add Book'}
         </button>
         {editingBook && (
           <button type="button" className="secondary" onClick={() => {
