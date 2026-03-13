@@ -29,8 +29,10 @@ The application utilizes a **Push-on-Change** model to maintain data integrity:
 
 ### 2. Installation & Local Setup
 Clone the repository:
+```
 Bash
-git clone <your-repo-link>
+git clone https://github.com/03uzma/Book-manager-pro
+```
 Install dependencies:
 Run npm install in both the backend and frontend directories.
 
@@ -44,7 +46,7 @@ Start the backend with node server.js and the frontend with npm start.
 Multi-Client Synchronization Test
 Method: Opened two separate browser windows (one Admin, one User) side-by-side.
 
-Observation: Adding or Editing a book in the Admin window resulted in a <150ms update in the User window without any manual interaction.
+Observation: Adding or Editing a book in the Admin window resulted in an update in the User window without any manual interaction.
 
 Resilience & Error Handling
 Connection Indicator: The UI features a status badge (Live/Offline) to provide immediate feedback on connection health.
@@ -52,11 +54,11 @@ Connection Indicator: The UI features a status badge (Live/Offline) to provide i
 Graceful Recovery: Verified that if the connection drops, the client successfully reconnects and re-fetches the initial state once the server is back online.
 
 ### 4. Maintenance & Troubleshooting Guide
-Status Indicator is Red (Offline): * Check if the backend server is waking up (Render cold-start may take ~30s).
+Status Indicator is Red (Offline): Check if the backend server is waking up (Render cold-start may take ~30s).
 
 Verify the REACT_APP_BACKEND_URL matches the deployed backend link.
 
-Updates Not Reflecting: * Open DevTools > Network > WS. Verify the 101 Switching Protocols status for the socket.io handshake.
+Updates Not Reflecting: Open DevTools > Network > WS. Verify the 101 Switching Protocols status for the socket.io handshake.
 
 Check for CORS errors in the console to ensure the Vercel URL is whitelisted in server.js.
 
@@ -64,7 +66,7 @@ Check for CORS errors in the console to ensure the Vercel URL is whitelisted in 
 ##  How to Use the Application
 Open the App: Go to https://book-manager-pro.vercel.app.
 
-Dual Windows: Open the same link in two windows side-by-side (one in Incognito).
+Dual Windows: Open the same link in two windows side-by-side.
 
 Set Roles: Set one window to Admin and the other to User.
 
